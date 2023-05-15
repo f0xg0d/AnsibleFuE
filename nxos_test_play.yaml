@@ -5,31 +5,31 @@
   gather_facts: false
   vars_prompt:
 	- name: ansible_ssh_user
-	  prompt: Benutzernamen eingeben
-	  private: false
+      prompt: Benutzernamen eingeben
+      private: false
 	- name: ansible_ssh_pass
-	  prompt: Passwort eingeben
-	  private: true
+      prompt: Passwort eingeben
+      private: true
   vars:
 	cli:
-	  host: "{{ inventory_hostname }}"
-	  username: "{{ ansible_ssh_user }}"
-	  password: "{{ ansible_ssh_pass }}"
+      host: "{{ inventory_hostname }}"
+      username: "{{ ansible_ssh_user }}"
+      password: "{{ ansible_ssh_pass }}"
   tasks:
-	- name: Get NXOS facts
-	  cisco.nxos.nxos_facts:
-		gather_subset: all
-	  register: nxosfacts_out
-	  tags: nxos-facts
+    - name: Get NXOS facts
+      cisco.nxos.nxos_facts:
+        gather_subset: all
+      register: nxosfacts_out
+      tags: nxos-facts
 	- name: Print nxosfacts_out
-	  ansible.builtin.debug:
-		var: nxosfacts_out
+      ansible.builtin.debug:
+        var: nxosfacts_out
 	- name: NXOS CLI show version
-	  cisco.nxos.nxos_command:
-		commands: show version
-		wait_for: result[0] contains Cisco
-	  register: nxos_command_show_ver_out
-	  tags: nxos-command
+      cisco.nxos.nxos_command:
+        commands: show version
+        wait_for: result[0] contains Cisco
+      register: nxos_command_show_ver_out
+      tags: nxos-command
 	- name: Print nxos_command_show_ver_out
-	  ansible.builtin.debug:
-		var: nxos_command_show_ver_out.stdout_lines
+      ansible.builtin.debug:
+        var: nxos_command_show_ver_out.stdout_lines
