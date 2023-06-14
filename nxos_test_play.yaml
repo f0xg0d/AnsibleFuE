@@ -1,7 +1,5 @@
 ---
 - name: Test Playbook
-  hosts: switch3.1
-  connection: network_cli
   gather_facts: false
   tasks:
     - name: NXOS CLI show version
