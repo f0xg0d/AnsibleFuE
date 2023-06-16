@@ -10,4 +10,3 @@
       register: "output"
 # The Output of the above task will be displayed on the Screen
     - debug: var=output.stdout_lines
-    
