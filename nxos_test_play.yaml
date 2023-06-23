@@ -3,6 +3,13 @@
   hosts: switch3.1
   connection: network_cli
   gather_facts: false
+  vars_prompt:
+    - name: ansible_ssh_user
+      prompt: Benutzernamen eingeben
+      private: false
+    - name: ansible_ssh_pass
+      prompt: Passwort eingeben
+      private: true
   vars:
     cli:
       host: "{{ inventory_hostname }}"
